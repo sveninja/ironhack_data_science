@@ -48,7 +48,7 @@ If your token is valid, you will see a JSON response that looks like:
 Because it is inconvenient to read long API responses in Terminal, you can export the response into a physical file with the following command:
 
 ```bash
-$ curl -u johndoe:d10ev1shpm10x5qox9ckw1k9b792p9rq0ogplpn5cyo55 https://api.github.com/user` > output.json
+$ curl -u johndoe:d10ev1shpm10x5qox9ckw1k9b792p9rq0ogplpn5cyo55 https://api.github.com/user > output.json
 ```
 
 Then you can open `output.json` with your favorite text editor to have a deep look.
@@ -61,7 +61,7 @@ Then you can open `output.json` with your favorite text editor to have a deep lo
 
 ### Challenge 1: Fork Languages
 
-You will find out how many programming languages are used among all the forks created from the main lab repo of your bootcamp. Assuming the main lab repo is `ironhack-datalabs/madrid-oct-2018`, you will:
+You will find out how many programming languages are used among all the forks created from the main lab repo of your bootcamp. Assuming the main lab repo is `ironhack-datalabs/databer0619`, you will:
 
 1. Obtain the full list of forks created from the main lab repo via Github API.
 
