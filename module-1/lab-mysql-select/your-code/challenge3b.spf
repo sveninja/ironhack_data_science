@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>database</key>
+			<string>publications</string>
+			<key>host</key>
+			<string>127.0.0.1</string>
+			<key>kcid</key>
+			<string>3605524200699393161</string>
+			<key>name</key>
+			<string>sveninja</string>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPTCPIPConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>root</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>utf8</string>
+			<key>contentFilterV2</key>
+			<dict>
+				<key>children</key>
+				<array/>
+				<key>filterClass</key>
+				<string>groupNode</string>
+				<key>isConjunction</key>
+				<true/>
+			</dict>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSelection</key>
+			<data>
+			YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFy
+			Y2hpdmVyVCR0b3ASAAGGoK8QDwcIFRYXGBkdJCouMjU4PFUkbnVs
+			bNMJCgsMEBRXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6MNDg+A
+			AoADgASjERITgAWABoAIgA5UdHlwZVRyb3dzVGtleXNfECZTZWxl
+			Y3Rpb25EZXRhaWxUeXBlUHJpbWFyeUtleWVkRGV0YWlsc9MJCgsa
+			GxygoIAH0h4fICFaJGNsYXNzbmFtZVgkY2xhc3Nlc18QE05TTXV0
+			YWJsZURpY3Rpb25hcnmjICIjXE5TRGljdGlvbmFyeVhOU09iamVj
+			dNIKCyUpoyYnKIAJgAuADIAN0gsrLC1ZTlMuc3RyaW5ngApXc3Rv
+			cl9pZNIeHy8wXxAPTlNNdXRhYmxlU3RyaW5noy8xI1hOU1N0cmlu
+			Z9ILKyw0gApXb3JkX251bdILKyw3gApYdGl0bGVfaWTSHh85Ol5O
+			U011dGFibGVBcnJheaM5OyNXTlNBcnJhedIeHyI9oiIjXxAPTlNL
+			ZXllZEFyY2hpdmVy0UBBVGRhdGGAAQAIABEAGgAjAC0AMgA3AEkA
+			TwBWAF4AaQBwAHQAdgB4AHoAfgCAAIIAhACGAIsAkACVAL4AxQDG
+			AMcAyQDOANkA4gD4APwBCQESARcBGwEdAR8BIQEjASgBMgE0ATwB
+			QQFTAVcBYAFlAWcBbwF0AXYBfwGEAZMBlwGfAaQBpwG5AbwBwQAA
+			AAAAAAIBAAAAAAAAAEIAAAAAAAAAAAAAAAAAAAHD
+			</data>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {735, 506}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>  
+CREATE OR REPLACE VIEW new_table3 AS
+SELECT authors.au_id AS AUTHOR_ID, au_lname AS LAST_NAME, au_fname AS FIRST_NAME, titles.title AS TITLE, publishers.pub_name AS PUBLISHER, sales.qty AS BOOKS_SOLD
+FROM authors
+INNER JOIN titleauthor ON authors.au_id = titleauthor.au_id
+INNER JOIN titles ON titleauthor.title_id = titles.title_id
+INNER JOIN publishers ON titles.pub_id = publishers.pub_id
+INNER JOIN sales ON titleauthor.title_id = sales.title_id;
+
+/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, PUBLISHER, COUNT(*) FROM new_table GROUP BY AUTHOR_ID, PUBLISHER; */
+
+/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, COUNT(*) FROM new_table3 GROUP BY AUTHOR_ID, TITLE; */
+
+/* SELECT 
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+ORDER BY SUM(BOOKS_SOLD) DESC; */
+
+
+/* select *
+from
+  top_n_test
+order by
+  num
+fetch first 3 rows only; */
+
+/* SELECT * FROM table ORDER BY column LIMIT 5000 */
+
+/* start challenge 3 */
+
+SELECT
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+/* ORDER BY SUM(BOOKS_SOLD) DESC */
+HAVING total IS NOT NULL;
+
+/* end challenge 3 */
+
+</string>
+			<key>table</key>
+			<string>sales</string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>214</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, PUBLISHER, COUNT(*) FROM new_table GROUP BY AUTHOR_ID, PUBLISHER; */
+
+/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, COUNT(*) FROM new_table3 GROUP BY AUTHOR_ID, TITLE; */
+
+
+
+/* SELECT 
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+ORDER BY SUM(BOOKS_SOLD) DESC; */
+
+
+/* select *
+from
+  top_n_test
+order by
+  num
+fetch first 3 rows only; */
+
+/* SELECT * FROM table ORDER BY column LIMIT 5000 */
+
+/* start challenge 3 */
+
+SELECT
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+ORDER BY SUM(BOOKS_SOLD) DESC
+LIMIT 3</string>
+		<string>/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, PUBLISHER, COUNT(*) FROM new_table GROUP BY AUTHOR_ID, PUBLISHER; */
+
+/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, COUNT(*) FROM new_table3 GROUP BY AUTHOR_ID, TITLE; */
+
+/* SELECT 
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+ORDER BY SUM(BOOKS_SOLD) DESC; */
+
+
+/* select *
+from
+  top_n_test
+order by
+  num
+fetch first 3 rows only; */
+
+/* SELECT * FROM table ORDER BY column LIMIT 5000 */
+
+/* start challenge 3 */
+
+SELECT
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+/* ORDER BY SUM(BOOKS_SOLD) DESC */
+HAVING total IS NOT NULL</string>
+		<string>/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, PUBLISHER, COUNT(*) FROM new_table GROUP BY AUTHOR_ID, PUBLISHER; */
+
+/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, COUNT(*) FROM new_table3 GROUP BY AUTHOR_ID, TITLE; */
+
+/* SELECT 
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+ORDER BY SUM(BOOKS_SOLD) DESC; */
+
+
+/* select *
+from
+  top_n_test
+order by
+  num
+fetch first 3 rows only; */
+
+/* SELECT * FROM table ORDER BY column LIMIT 5000 */
+
+/* start challenge 3 */
+
+SELECT
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+/* ORDER BY SUM(BOOKS_SOLD) DESC */
+HAVING total IS NULL</string>
+		<string>/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, PUBLISHER, COUNT(*) FROM new_table GROUP BY AUTHOR_ID, PUBLISHER; */
+
+/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, COUNT(*) FROM new_table3 GROUP BY AUTHOR_ID, TITLE; */
+
+/* SELECT 
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+ORDER BY SUM(BOOKS_SOLD) DESC; */
+
+
+/* select *
+from
+  top_n_test
+order by
+  num
+fetch first 3 rows only; */
+
+/* SELECT * FROM table ORDER BY column LIMIT 5000 */
+
+/* start challenge 3 */
+
+SELECT
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+/* ORDER BY SUM(BOOKS_SOLD) DESC */
+HAVING AUTHOR_ID IS NOT NULL</string>
+		<string>/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, PUBLISHER, COUNT(*) FROM new_table GROUP BY AUTHOR_ID, PUBLISHER; */
+
+/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, COUNT(*) FROM new_table3 GROUP BY AUTHOR_ID, TITLE; */
+
+/* SELECT 
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+ORDER BY SUM(BOOKS_SOLD) DESC; */
+
+
+/* select *
+from
+  top_n_test
+order by
+  num
+fetch first 3 rows only; */
+
+/* SELECT * FROM table ORDER BY column LIMIT 5000 */
+
+/* start challenge 3 */
+
+SELECT
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+/* ORDER BY SUM(BOOKS_SOLD) DESC */
+HAVING BOOKS_SOLD IS NOT NULL</string>
+		<string>/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, PUBLISHER, COUNT(*) FROM new_table GROUP BY AUTHOR_ID, PUBLISHER; */
+
+/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, COUNT(*) FROM new_table3 GROUP BY AUTHOR_ID, TITLE; */
+
+jfhfg
+
+/* SELECT 
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+ORDER BY SUM(BOOKS_SOLD) DESC; */
+
+
+/* select *
+from
+  top_n_test
+order by
+  num
+fetch first 3 rows only; */
+
+/* SELECT * FROM table ORDER BY column LIMIT 5000 */
+
+/* start challenge 3 */
+
+SELECT
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+/* ORDER BY SUM(BOOKS_SOLD) DESC */
+HAVING BOOKS_SOLD IS NOT NULL</string>
+		<string>/* end challenge 3 */</string>
+		<string>/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, PUBLISHER, COUNT(*) FROM new_table GROUP BY AUTHOR_ID, PUBLISHER; */
+
+/* SELECT AUTHOR_ID, FIRST_NAME, LAST_NAME, COUNT(*) FROM new_table3 GROUP BY AUTHOR_ID, TITLE; */
+
+
+/* SELECT 
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+ORDER BY SUM(BOOKS_SOLD) DESC; */
+
+
+/* select *
+from
+  top_n_test
+order by
+  num
+fetch first 3 rows only; */
+
+/* SELECT * FROM table ORDER BY column LIMIT 5000 */
+
+/* start challenge 3 */
+
+SELECT
+    AUTHOR_ID,
+    LAST_NAME,
+    FIRST_NAME,
+    FORMAT(SUM(BOOKS_SOLD),
+        2) total
+FROM
+    new_table3
+GROUP BY AUTHOR_ID
+ORDER BY SUM(BOOKS_SOLD) DESC
+LIMIT 3</string>
+		<string>/* end challenge 3 */
+
+
+
+
+
+
+\\</string>
+		<string>SELECT au_id, au_lname, au_fname FROM authors
+JOIN titleauthor.title_id
+ON authors.au_id = titleauthor.au_id</string>
+		<string>FROM titleauthor `title_id
+LEFT JOIN xxx</string>
+		<string>SELECT au_id, au_lname, au_fname FROM authors
+FROM titleauthor `title_id
+LEFT JOIN xxx;</string>
+		<string>SELECT au_id, au_lname FROM authors</string>
+		<string>SELECT au_fname FROM authors</string>
+		<string>SELECT au_id FROM authors</string>
+		<string>SELECT AUTHOR ID FROM authors</string>
+		<string>SELECT AUTHOR ID</string>
+		<string>SELECT AUTHOR ID FROM publications</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>8.0.16</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>
